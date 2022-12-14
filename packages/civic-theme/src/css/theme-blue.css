@@ -1,0 +1,86 @@
+/* colors must be added as rgb and not hex */
+.blue-theme {
+  --color-primary: 255, 255, 255;
+  --color-secondary: 34, 30, 66;
+  --color-tertiary: 159, 205, 233;
+  --color-quaternary: 255, 245, 118;
+
+  --color-base: 255, 255, 255;
+  --color-base-text: 0, 0, 0;
+  --color-base-border: 0, 0, 0;
+
+  --color-success: 86, 154, 255;
+  --color-success-text: 0, 0, 0;
+  --color-success-border: 0, 0, 0;
+
+  --color-info: 241, 196, 15;
+  --color-info-text: 0, 0, 0;
+  --confor-info-border: 0, 0, 0;
+
+  --color-error: 255, 0, 0;
+  --color-error-text: 255, 255, 255;
+  --color-error-border: 0, 0, 0;
+
+  --color-warning: 255, 0, 0;
+  --color-warning-text: 255, 255, 255;
+  --color-warning-border: 0, 0, 0;
+
+  --color-inactive: 153, 153, 153;
+  --color-inactive-text: 0, 0, 0;
+  --color-inactive-border: 0, 0, 0;
+
+  --color-delete: 174, 20, 57;
+  --color-delete-text: 255, 255, 255;
+  --color-delete-border: 0, 0, 0;
+
+  --color-background: 150, 150, 150;
+  --color-background-hover: 91, 91, 91;
+
+  --font-family-sans: "Inter";
+}
+
+.blue-theme body {
+  background-image: url("/src/assets/img/space.webp");
+}
+
+.blue-theme h1 {
+  font-size: 77px;
+  line-height: 66px;
+  font-weight: 800;
+  color: rgb(var(--color-primary));
+}
+
+.blue-theme h2 {
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 500;
+  color: rgb(var(--color-primary));
+}
+
+.blue-theme h3 {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 500;
+  color: rgb(var(--color-primary));
+}
+
+.blue-theme h4 {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 600;
+  color: rgb(var(--color-primary));
+}
+
+.blue-theme h5 {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 400;
+  color: rgb(var(--color-primary));
+}
+
+.blue-theme p {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  color: rgb(var(--color-primary));
+}

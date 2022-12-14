@@ -1,0 +1,23 @@
+declare const styles: {
+  readonly "nft-back-button": string;
+  readonly "close-dialog-button": string;
+  readonly "nft-item-share": string;
+  readonly "civic-card-background": string;
+  readonly "civic-verification-attribute-icon": string;
+  readonly "civic-confirmation-modal": string;
+  readonly "civic-element-with-tooltip": string;
+  readonly "wallet-adapter-modal-wrapper-no-logo": string;
+  readonly "web3modal-modal-card": string;
+  readonly "web3modal-provider-container": string;
+  readonly "wallet-adapter-modal-wrapper": string;
+  readonly "wallet-adapter-modal-title": string;
+  readonly "wallet-adapter-modal-list-more": string;
+  readonly "wallet-adapter-modal-list": string;
+  readonly "wallet-adapter-button": string;
+  readonly "wallet-adapter-modal-collapse-button": string;
+  readonly swiper: string;
+  readonly faded: string;
+  readonly "faded-left": string;
+  readonly "faded-right": string;
+};
+export = styles;

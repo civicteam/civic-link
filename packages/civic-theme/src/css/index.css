@@ -1,0 +1,204 @@
+@import "theme-main.css";
+@import "theme-blue.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --toastify-color-light: rgb(var(--color-secondary));
+  --toastify-color-dark: rgb(var(--color-primary));
+  --toastify-color-info: rgb(var(--color-info));
+  --toastify-color-success: rgb(var(--color-success));
+  --toastify-color-warning: rgb(var(--color-warning));
+  --toastify-color-error: rgb(var(--color-error));
+}
+
+.nft-back-button {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  backdrop-filter: blur(1rem);
+}
+
+/* This is deprecated but will work to ensure firefox is not broken for people who haven't updated their browsers*/
+@-moz-document url-prefix() {
+  .close-dialog-button{
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+}
+
+.nft-item-share {
+  background: #ffffff;
+  backdrop-filter: blur(1rem);
+  border-radius: 16px;
+}
+
+.civic-card-background {
+  background: #ffffff;
+  backdrop-filter: blur(1rem);
+}
+
+.civic-verification-attribute-icon {
+  background: radial-gradient(
+    131.82% 131.82% at 53.9% 0%,
+    #0d0f27 26.52%,
+    #383b56 64.53%,
+    #787eb5 99.89%
+  );
+  box-shadow: inset -1px -1px 2px #1a273a;
+}
+
+.civic-confirmation-modal {
+  background: #ffffff;
+  box-shadow: 0 0 28px rgba(19, 21, 30, 0.65);
+}
+
+div[role=tooltip] {
+  visibility: hidden;
+}
+
+.civic-element-with-tooltip:hover div[role=tooltip] {
+  visibility: visible;
+}
+
+/*We need this because its deep inside a package - not accessible through tailwind classes*/
+.wallet-adapter-modal-wrapper-no-logo,
+.web3modal-modal-card,
+.web3modal-provider-container,
+.wallet-adapter-modal-wrapper {
+  background: #ffffff;
+  backdrop-filter: blur(2rem);
+}
+
+.wallet-adapter-modal-wrapper {
+  font-family: "Aventa";
+}
+
+h1.wallet-adapter-modal-title {
+  font-family: "Aventa";
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 600;
+  padding: 64px 48px 24px 48px;
+}
+
+.wallet-adapter-modal-wrapper button.wallet-adapter-modal-list-more {
+  color: #ffffff;
+  font-family: "Aventa";
+  font-weight: 600;
+}
+
+/*We need this because its deep inside a package - not accessible through tailwind classes*/
+.wallet-adapter-modal-list .wallet-adapter-button,
+.wallet-adapter-button.wallet-adapter-modal-collapse-button {
+  @apply rounded;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background-color: rgb(var(--color-primary));
+}
+
+ul.wallet-adapter-modal-list li {
+  margin: 1rem 0;
+}
+
+ul.wallet-adapter-modal-list li .wallet-adapter-button {
+  margin: 1rem 0;
+}
+
+.swiper {
+  width: 100%;
+  display: flex;
+  padding: 45px !important;
+}
+
+@media screen and (max-width: 1535px) and (min-width: 450px) {
+  .swiper {
+    padding-left: 0px !important;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .swiper{
+    width: 70% !important;
+  }
+  .faded {
+    position: relative;
+    color: white;
+  }
+
+  .faded:before, .faded:after {
+    content: "";
+    position: absolute;
+    z-index: 20;
+    display: block;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    border-collapse: separate;
+  }
+
+  .faded.faded-left.faded-right:before {
+    left: -5px;
+    box-shadow: inset 80px  0 30px -28px;
+  }
+
+  .faded.faded-left.faded-right:after {
+    right: -5px;
+    box-shadow: inset -80px 0 30px -28px;
+  }
+}
+
+div button.wallet-adapter-button.wallet-adapter-button-trigger {
+  border: 1px solid rgb(47, 13, 48);
+  box-sizing: border-box;
+  border-radius: 50px;
+  height: 50px;
+  font-family: Aventa;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: -0.41px;
+  color: rgb(47, 13, 48);
+  background-color: unset;
+}
+div button.wallet-adapter-button.wallet-adapter-button-trigger:hover {
+  background-color: rgba(240, 245, 246);
+}
+
+.wallet-adapter-modal-wrapper h1.wallet-adapter-modal-title {
+  font-family: "Aventa";
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 600;
+  color: white;
+}
+
+.vertical-steps-with-numbers li {
+  margin: 0 0 0.5rem 0;
+  counter-increment: my-awesome-counter;
+  position: relative;
+}
+
+.vertical-steps-with-numbers li::before {
+  content: counter(my-awesome-counter);
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  --size: 32px;
+  line-height: var(--size);
+  width: var(--size);
+  height: var(--size);
+  top: 2px;
+  left: 0;
+  text-align: center;
+  z-index: 999;
+  color: #FF6B4E;
+}
+
+.vertical-steps-with-numbers li.active::before {
+  display: none;
+}
