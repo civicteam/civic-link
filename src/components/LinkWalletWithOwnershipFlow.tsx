@@ -142,7 +142,7 @@ function LinkWalletWithOwnershipFlow({
         >
           <div className="pb-5 text-center text-xl">
             <span data-testid="BAD_INPUT_PARAMETERS_DIALOG">
-              Civic-link failed: the parameters used to initialize Civic-link 
+              Link-wallet failed: the parameters used to initialize link-wallet
               aren&apos;t correct. Please contact your dApp provider.
             </span>
           </div>

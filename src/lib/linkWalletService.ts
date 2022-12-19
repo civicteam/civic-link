@@ -57,7 +57,7 @@ export class LinkWalletService {
 
   public didSolDataAccount: DidSolDataAccount | null = null;
 
-  private isInitialized: boolean = false;
+  private isInitialized = false;
 
   private currentStep = 0;
 
