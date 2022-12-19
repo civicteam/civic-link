@@ -246,22 +246,24 @@ export default function WalletLinkingProvider({
         isOpen={isWalletLinkingInProgress}
         onClose={resetState}
       />
-      {wallet.publicKey && selectedProviderWallet.publicKey && stagedWallets && (
-        <ConfirmLinkingDialog
-          isOpen={isChangeWalletDialogVisible}
-          onClose={() => {
-            setStagedWallets([]);
-            setIsChangeWalletDialogVisible(false);
-          }}
-          loginWalletAddress={wallet.publicKey}
-          stagedWallets={stagedWallets.map(R.prop("publicKey"))}
-          onOk={() => {
-            setIsChangeWalletDialogVisible(false);
-            onSave();
-          }}
-          selectedWalletPublicKey={selectedProviderWallet.publicKey}
-        />
-      )}
+      {wallet.publicKey &&
+        selectedProviderWallet.publicKey &&
+        stagedWallets && (
+          <ConfirmLinkingDialog
+            isOpen={isChangeWalletDialogVisible}
+            onClose={() => {
+              setStagedWallets([]);
+              setIsChangeWalletDialogVisible(false);
+            }}
+            loginWalletAddress={wallet.publicKey}
+            stagedWallets={stagedWallets.map(R.prop("publicKey"))}
+            onOk={() => {
+              setIsChangeWalletDialogVisible(false);
+              onSave();
+            }}
+            selectedWalletPublicKey={selectedProviderWallet.publicKey}
+          />
+        )}
 
       <AlreadyLinkedDialog
         isOpen={!!alreadyLinkedAddress}
