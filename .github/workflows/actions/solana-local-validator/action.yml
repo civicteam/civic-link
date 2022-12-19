@@ -1,0 +1,29 @@
+name: setup-solana-local-validator
+description: Install dependencies required to run solana local validator
+
+inputs:
+  SOLANA_VERSION:
+    required: false
+    default: v1.14.10
+  ANCHOR_VERSION:
+    required: false
+    default: 0.24.2
+
+runs:
+  using: "composite"
+  steps:
+    # install dependencies required to run solana local validator
+    # install rust
+    - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      shell: bash
+    # install cargo
+    - run: echo "/home/runner/.cargo/bin" >> $GITHUB_PATH
+      shell: bash
+    # install solana CLI
+    - run: curl -sSfL https://release.solana.com/${{ inputs.SOLANA_VERSION }}/install | sh
+      shell: bash
+    # install anchor
+    - run: echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+      shell: bash
+    - run: npm i -g @project-serum/anchor-cli@${{ inputs.ANCHOR_VERSION }} ts-mocha typescript
+      shell: bash

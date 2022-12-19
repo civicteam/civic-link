@@ -1,0 +1,22 @@
+name: Install workspace
+description: Setup node and install project dependencies
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node ${{ matrix.node }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+    - name: Cache node dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/yarn
+        key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install
+      shell: bash
+      run: yarn install --frozen-lockfile
+      working-directory: ./
