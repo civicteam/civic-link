@@ -21,12 +21,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      - name: Setup solana-local-validator
+        uses: ./.github/workflows/actions/solana-local-validator
       - name: Prepare workspace
         uses: ./.github/workflows/actions/workspace-install
       - name: Lint
         run: yarn lint
       - name: Build
-        working-directory: ./
         run: yarn build
       - name: Test
         run: yarn test
