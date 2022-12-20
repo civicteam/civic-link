@@ -25,7 +25,7 @@ runs:
     - name: Update .npmrc
       shell: bash
       run: |
-        [ -z "${{ inputs.NPM_TOKEN }}" ] && echo "//registry.npmjs.org/:_authToken=${{ inputs.NPM_TOKEN }}" > .npmrc || echo "No npm token provided, skipping .npmrc update."
+        [[ ! -z "${{ inputs.NPM_TOKEN }}" ]] && echo "//registry.npmjs.org/:_authToken=${{ inputs.NPM_TOKEN }}" > .npmrc || echo "No npm token provided, skipping .npmrc update."
 
     - name: Install
       shell: bash
