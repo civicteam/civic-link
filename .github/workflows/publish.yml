@@ -1,12 +1,9 @@
-name: Build, lint and test civic-link
+name: Publish civic-link
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
   workflow_dispatch:
 
 jobs:
@@ -26,6 +23,8 @@ jobs:
 
       - name: Prepare workspace
         uses: ./.github/workflows/actions/workspace-install
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISHING_TOKEN }}
 
       - name: Lint
         run: yarn lint
@@ -35,3 +34,8 @@ jobs:
 
       - name: Test
         run: yarn test
+
+      - name: Publish
+        run: |
+          echo "Publishing @civic/civic-link v${{ github.ref_name }}";
+# NODE_ENV=production yarn publish --access public ---new-version ${{ github.ref_name }};

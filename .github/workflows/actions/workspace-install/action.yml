@@ -1,6 +1,10 @@
 name: Install workspace
 description: Setup node and install project dependencies
 
+inputs:
+  NPM_TOKEN:
+    required: false
+
 runs:
   using: "composite"
   steps:
@@ -8,6 +12,7 @@ runs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node }}
+
     - name: Cache node dependencies
       uses: actions/cache@v2
       with:
@@ -16,6 +21,12 @@ runs:
         restore-keys: |
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+
+    - name: Update .npmrc
+      shell: bash
+      run: |
+        [ -z "${{ inputs.NPM_TOKEN }}" ] && echo "//registry.npmjs.org/:_authToken=${{ inputs.NPM_TOKEN }}" > .npmrc || echo "No npm token provided, skipping .npmrc update."
+
     - name: Install
       shell: bash
       run: yarn install --frozen-lockfile
