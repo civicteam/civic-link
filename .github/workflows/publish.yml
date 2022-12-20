@@ -38,4 +38,4 @@ jobs:
       - name: Publish
         run: |
           echo "Publishing @civic/civic-link v${{ github.ref_name }}";
-# NODE_ENV=production yarn publish --access public ---new-version ${{ github.ref_name }};
+          NODE_ENV=production yarn publish --access public ---new-version ${{ github.ref_name }};
