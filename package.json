@@ -1,19 +1,19 @@
 {
   "name": "@civic/civic-link",
-  "private": false,
-  "version": "0.0.2",
+  "version": "0.0.4",
+  "author": "civic.com",
+  "repository": "git@github.com:civicteam/civic-link.git",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist/",
     "build": "tsc -b tsconfig.build.json && tsc -b tsconfig.umd.json",
     "preview": "vite preview",
-    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
     "start:validator": "solana-test-validator -q --bpf-program didso1Dpqpm4CsiCjzP766BGY89CAdD6ZBL68cRhFPc test/fixtures/sol_did_3.1.0.so --bpf-program regUajGv87Pti6QRLeeRuQWrarQ1LmEyDXcAozko6Ax test/fixtures/did_registry_0.0.6.so --reset",
     "test:unit": "jest -c=jest.config.unit.js test/unit",
     "test:integration:only": "jest -c=jest.config.integration.js test/integration --detectOpenHandles --coverage false",
     "test:integration": "start-server-and-test start:validator http://localhost:8899/health test:integration:only",
     "test": "yarn test:unit && yarn test:integration",
-    "test:changed": "jest -c jest.updates.config.js --onlyChanged",
     "test:watch": "jest --watch -c jest.updates.config.js --onlyChanged",
     "lint": "eslint -c .eslintrc.js '{src,test}/**/*.{ts,tsx}'",
     "lint:fix": "eslint -c .eslintrc.js --fix '{src,test}/**/*.{ts,tsx}'"
