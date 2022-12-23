@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@civic/did-registry": "^0.0.6-alpha.2",
-    "@civic/react-commons": "^0.0.2",
+    "@civic/react-commons": "^0.0.3",
     "@civic/shared-tailwind": "^1.0.1",
     "@coinbase/wallet-sdk": "^3.5.2",
     "@ethersproject/providers": "^5.7.1",
