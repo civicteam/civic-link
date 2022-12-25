@@ -2000,7 +2000,28 @@
     "@wallet-standard/app" "^1.0.0"
     "@wallet-standard/base" "^1.0.0"
 
-"@solana/web3.js@^1.21.0", "@solana/web3.js@^1.36.0", "@solana/web3.js@^1.44.3", "@solana/web3.js@^1.59.1", "@solana/web3.js@^1.62.0", "@solana/web3.js@^1.70.1":
+"@solana/web3.js@1.65.0":
+  version "1.65.0"
+  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.65.0.tgz#61b9742ee59ac574d88204ba23e68778fe8b42d3"
+  integrity sha512-XDFBPL1fxkF0Urmj4u+4V5KHw5c58cEHigAMQSCWA9kbWCRIYnDDehdXGl0N00vBQglUN+FQrDEYW6RrYUX5cA==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@noble/ed25519" "^1.7.0"
+    "@noble/hashes" "^1.1.2"
+    "@noble/secp256k1" "^1.6.3"
+    "@solana/buffer-layout" "^4.0.0"
+    bigint-buffer "^1.1.5"
+    bn.js "^5.0.0"
+    borsh "^0.7.0"
+    bs58 "^4.0.1"
+    buffer "6.0.1"
+    fast-stable-stringify "^1.0.0"
+    jayson "^3.4.4"
+    node-fetch "2"
+    rpc-websockets "^7.5.0"
+    superstruct "^0.14.2"
+
+"@solana/web3.js@^1.21.0", "@solana/web3.js@^1.36.0", "@solana/web3.js@^1.44.3", "@solana/web3.js@^1.59.1", "@solana/web3.js@^1.70.1":
   version "1.70.2"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.70.2.tgz#fbb9dbdf1aa3e87a0d88f7881989021e063a1307"
   integrity sha512-GNxOzKZ6+piDG9csnJGnrNBTks+dNLC3n3TGZMJ99WqbKNuDRF2hfSGsr0Uoei5vyHBKvmb0J1F32tt1REe2lw==
