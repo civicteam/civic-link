@@ -12,20 +12,21 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # install rust
-    - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    - name: install rust
+      run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
       shell: bash
 
-    # install cargo
-    - run: echo "/home/runner/.cargo/bin" >> $GITHUB_PATH
+    - name: install cargo
+      run: echo "/home/runner/.cargo/bin" >> $GITHUB_PATH
       shell: bash
 
-    # install solana CLI
-    - run: curl -sSfL https://release.solana.com/${{ inputs.SOLANA_VERSION }}/install | sh
-      shell: bash
-
-    # install anchor
-    - run: echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-      shell: bash
-    - run: npm i -g @project-serum/anchor-cli@${{ inputs.ANCHOR_VERSION }} ts-mocha typescript
-      shell: bash
+    - name: install solana CLI and anchor
+      uses: nick-fields/retry@v2
+      # the installation fails intermittently, so retry up to 3 times
+      with:
+        timeout_minutes: 2
+        max_attempts: 3
+        command: |
+          curl -sSfL https://release.solana.com/${{ inputs.SOLANA_VERSION }}/install | sh
+          echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+          npm i -g @project-serum/anchor-cli@${{ inputs.ANCHOR_VERSION }} ts-mocha typescript
