@@ -171,7 +171,9 @@ describe("link wallet service integration tests", () => {
             expect(programId.toString()).toEqual(DID_SOL_PROGRAM.toString())
           );
           R.slice(3, 5, tx.instructions).map(({ programId }) =>
-            expect(programId.toString()).toEqual(DID_REGISTRY_PROGRAM_ID.toString())
+            expect(programId.toString()).toEqual(
+              DID_REGISTRY_PROGRAM_ID.toString()
+            )
           );
         });
       });
