@@ -168,10 +168,10 @@ describe("link wallet service integration tests", () => {
 
           expect(tx.instructions.length).toEqual(5);
           R.slice(0, 3, tx.instructions).map(({ programId }) =>
-            expect(programId).toEqual(DID_SOL_PROGRAM.toBase58())
+            expect(programId.toString()).toEqual(DID_SOL_PROGRAM.toString())
           );
           R.slice(3, 5, tx.instructions).map(({ programId }) =>
-            expect(programId).toEqual(DID_REGISTRY_PROGRAM_ID.toBase58())
+            expect(programId.toString()).toEqual(DID_REGISTRY_PROGRAM_ID.toString())
           );
         });
       });
