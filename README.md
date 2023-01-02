@@ -1,8 +1,8 @@
 # Civic Link
 
 This package orchestrates a user picking two different wallets on a single dApp, for example to link them together in some way.
-This works by setting up communication between the dApp and a child pop-up browser tab, which has a separate wallet signing context.
-The second wallet's information is then passed back to the parent dApp through an API based on window.postMessage.
+This works by setting up the communication between the dApp and a child pop-up browser tab, which has a separate wallet signing context.
+The second wallet's information is then passed back to the parent dApp through an API based on _window.postMessage_.
 
 ## Usage
 
