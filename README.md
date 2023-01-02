@@ -6,7 +6,7 @@ The second wallet's information is then passed back to the parent dApp through a
 
 ## Usage
 
-To use Civic-Link, create a component using `LinkWalletWithOwnershipFlow` from `@civic/civic-link` wrapped with `WalletConnectionProvider` and `PostMessageProvider` (to listen to the link wallet events):
+To use Civic Link, create a component using `LinkWalletWithOwnershipFlow` from `@civic/civic-link` wrapped with `WalletConnectionProvider` and `PostMessageProvider` (to listen to the link wallet events):
 ```typescript
 import React from "react";
 import {
@@ -60,7 +60,7 @@ function TestComponent({
 });
 ```
 
-### Listenning to events
+### Listening to events
 
 The `useCivicPostMessageApi` hook provides an interface to listen to the link wallet events **in the parent dApp**:
 ```typescript
