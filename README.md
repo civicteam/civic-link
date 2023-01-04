@@ -5,7 +5,7 @@ This works by setting up the communication between the dApp and a child pop-up b
 The second wallet's information is then passed back to the parent dApp through an API based on _window.postMessage_.
 
 Civic Link is integrated in [civic.me](https://civic.me/). You can try it by connecting your wallet and linking an additional wallet to your _civic.me_ profile (in the Settings -> Wallet menu):
-![](https://github.com/civicteam/civic-link/resources/civic-link.gif)
+![](https://github.com/civicteam/civic-link/blob/main/resources/civic-link.gif)
 
 For more details: [Civic Help Center - How do I link an additional wallet?](https://support.civic.com/hc/en-us/articles/7012041417111-How-do-I-link-an-additional-wallet).
 
