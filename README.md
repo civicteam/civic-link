@@ -26,7 +26,7 @@ import {
   PostMessageProvider,
 } from "@civic/civic-link";
 
-export function MakePublicFlow({}): React.ReactElement {
+export function LinkWalletFlow({}): React.ReactElement {
   return (
     <PostMessageProvider
     ...
