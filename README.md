@@ -1,18 +1,23 @@
 # Civic Link
 
-This package orchestrates a user picking two different wallets on a single dApp, for example to link them together in some way.
-This works by setting up the communication between the dApp and a child pop-up browser tab, which has a separate wallet signing context.
-The second wallet's information is then passed back to the parent dApp through an API based on _window.postMessage_.
+This package provides the tools and UI for a dApp to orchestrate a user linking one wallet to another. The linking mechanism uses the Decentralised IDentifier Solana program, and the associated [identity.com DID toolkit libraries](https://www.npmjs.com/package/@identity.com/sol-did-client).
 
-Civic Link is integrated in [civic.me](https://civic.me/). You can try it by connecting your primary wallet and linking an additional wallet to your _civic.me_ profile (in the Settings -> Wallet menu):
+![](link-wallet.png)
+
+The orchestration works by setting up opening a new 'child' browser window where the user can connect the wallet they want to link in a separate wallet signing context, without the 'parent' dApp needing to log the user out (the [solana wallet adapter](https://solana-labs.github.io/wallet-adapter/) doesn't allow connection of multiple wallets). The child browser window is initialised with GET parameters passed from the parent dApp. When the wallet linking is finished, the child window communicates this to the parent window using the _window.postMessage_ API.
+
+Note: the 'child' link-wallet component must be hosted in a separate application from the 'parent' dApp, alternatively, the civic-themed iframe can be referenced which is hosted at https://link.civic.me.
+
+The Civic Link tools can be seen in action as part of [civic.me](https://civic.me/). You can try it by connecting your primary wallet and linking an additional wallet to your _civic.me_ profile (in the Settings -> Wallet menu):
 ![](https://github.com/civicteam/civic-link/blob/main/resources/civic-link.gif)
 
 For more details: [Civic Help Center - How do I link an additional wallet?](https://support.civic.com/hc/en-us/articles/7012041417111-How-do-I-link-an-additional-wallet).
 
 ## Usage
 
-To use Civic Link, create a component using `LinkWalletWithOwnershipFlow` from `@civic/civic-link` wrapped with `WalletConnectionProvider` and `PostMessageProvider` (to listen to the link wallet events):
-```typescript
+### Link-wallet app (child)
+The link-wallet flow needs to run in a separately hosted application from the parent dApp and needs to implement an App like below:
+```
 import React from "react";
 import {
   LinkWalletInputParameters,
@@ -20,81 +25,39 @@ import {
   LinkWalletWithOwnershipFlow,
   PostMessageProvider,
 } from "@civic/civic-link";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
-export function LinkWalletExampleComponent({
-  linkWalletInputParameters,
-  targetWindow,
-}: {
-  linkWalletInputParameters: LinkWalletInputParameters;
-  targetWindow: Window;
-}): React.ReactElement {
+export function MakePublicFlow({}): React.ReactElement {
   return (
     <PostMessageProvider
-      targetWindow={targetWindow}
-      targetWindowOrigin={linkWalletInputParameters.origin || "*"}
-      listenForAnalytics={false}
+    ...
     >
       <WalletConnectionProvider
-        setWalletOnProviderChange
-        network={linkWalletInputParameters.chainNetwork as WalletAdapterNetwork}
+        ...
       >
-        <LinkWalletWithOwnershipFlow
-          linkWalletInputParameters={linkWalletInputParameters}
-          targetWindow={targetWindow}
-          horizontalSteps={false}
-        />
+          <LinkWalletWithOwnershipFlow
+            ...
+          />
       </WalletConnectionProvider>
     </PostMessageProvider>
   );
 }
+
 ```
 
-This can be defined as part of a **dApp's child pop-up browser tab**.
+### dApp (parent)
+The parent dApp needs to trigger the opening of the child link-wallet window using the `openLinkWalletPage` function from `useWalletLinking`. When wallet linking has completed successfully, the parent dApp can react to this event by using the `successfullyAddedWalletToDidPromise` from`useWalletLinking`. Note that all the snippets below need to be wrapped in the `<WalletLinkingProvider>`./
 
-The `useMultiWallet` hook provides an interface to the selected wallet:
-```typescript
-import { useMultiWallet } from "@civic/civic-link";
-
-function TestComponent({
-  const { wallet } = useMultiWallet();
-
-  useEffect(() => {
-    // ...
-  }, [wallet.publicKey]);
-});
 ```
-
-### Listening to events
-
-The `useCivicPostMessageApi` hook provides an interface to listen to the link wallet events **in the parent dApp**:
-```typescript
-import { useCivicPostMessageApi } from "@civic/civic-link";
-
-function TestComponent({
-  const { postMessageApi } = useCivicPostMessageApi();
-
-  // define a callback for when the child window sends a message:
-  const postMessageCallback = useCallback(
-    ({ eventType, data }: IncomingEvent) => {
-      console.log("postMessageApi IncomingEvent", {
-        eventType,
-        data,
-      });
-    // your event handling logic here
-    },
-  );
-
-  // attach the callback to the window.postMessage listener:
-  useEffect(() => {
-    postMessageApi.addEventListener(postMessageCallback);
-    return () => postMessageApi.removeEventListeners();
-  }, [postMessageApi]);
-});
+<App>
+  <WalletLinkingProvider>
+    const { openLinkWalletPage, successfullyAddedWalletToDidPromise } = useWalletLinking();
+    successfullyAddedWalletToDidPromise.then(() => {
+      showSuccess();
+    });
+    return <button onClick={openLinkWalletPage}>
+        Link Wallet
+      </button>
+    
+  </WalletLinkingProvider>
+</App>
 ```
-The `IncomingEvent` is interpreted as follows:
-  1. `incomingEvent.event` is one of:
-    - `IncomingEvent.WALLET_CONNECTED` => User has connected a wallet in the child window
-    // TODO: Document these when implemented:
-    - `IncomingEvent.ADD_WALLET_TO_DID_WITH_VERIFICATION`
-  2. `incomingEvent.data?.publicKey` : Base58-encoded Solana address of the wallet connected in the child window
