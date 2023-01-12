@@ -58,14 +58,14 @@ type SparseWallet = {
 };
 
 type OwnProps = {
-  addWalletAddress: (address: string) => void;
+  // addWalletAddress: (address: string) => void;
   existingWalletAddresses: string[];
   civicLinkUrl: string;
   postMessageOrigin: string;
 };
 
 export default function WalletLinkingProvider({
-  addWalletAddress,
+  // addWalletAddress,
   existingWalletAddresses,
   civicLinkUrl,
   postMessageOrigin,
@@ -158,7 +158,7 @@ export default function WalletLinkingProvider({
   );
 
   const postMessageCallback = useCallback(
-    async (evt) => {
+    async (evt: any) => {
       const { eventType, data } = evt as IncomingEvent;
       if (
         currentFlowType === FlowType.LOCAL &&
@@ -217,11 +217,11 @@ export default function WalletLinkingProvider({
 
   const onSave = useCallback(async () => {
     const newLinkedWallets = stagedWallets.map(R.prop("publicKey")) as string[];
-    const addWalletPromises = newLinkedWallets.map(addWalletAddress);
+    // const addWalletPromises = newLinkedWallets.map(addWalletAddress);
 
-    await Promise.all(addWalletPromises);
+    // await Promise.all(addWalletPromises);
     setStagedWallets([]);
-  }, [stagedWallets, addWalletAddress]);
+  }, [stagedWallets]);
 
   const value = useMemo(
     () => ({
