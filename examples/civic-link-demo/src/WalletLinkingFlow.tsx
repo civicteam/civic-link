@@ -10,16 +10,6 @@ import {
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import queryString from "query-string";
 
-// const linkingParams: LinkWalletInputParameters = {
-//   existingAuthorityPublicKey: "",
-//   existingAuthorityDid: "",
-//   flow: FlowType.VERIFY_WITH_OWNERSHIP,
-//   origin: "",
-//   chainNetwork: WalletChainType.SOLANA,
-// };
-
-// const targetWindow = window;
-
 export const WalletLinkingFlow = ({
   linkWalletInputParameters,
   targetWindow,

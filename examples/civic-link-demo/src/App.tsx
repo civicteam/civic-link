@@ -19,9 +19,12 @@ import {
   WalletModalProvider,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import queryString from "query-string";
-import { LinkWalletInputParameters } from "@civic/civic-link";
+import {
+  LinkWalletInputParameters,
+  WalletLinkingProvider,
+} from "@civic/civic-link";
 import "@civic/react-commons/dist/style.css";
 import { WalletLinkButton } from "./WalletLinkButton";
 import { WalletLinkingFlow } from "./WalletLinkingFlow";
@@ -31,17 +34,23 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 const Content = () => {
   const wallet = useWallet();
   return (
-    <div
-      style={{
-        height: "100%",
-        justifyContent: "center",
-        alignContent: "center",
-      }}
+    <WalletLinkingProvider
+      existingWalletAddresses={["2dm3CqveDgGgsHmNXNWBAUDfVUeDsbY2Cxr3kdH4GWFQ"]}
+      civicLinkUrl={"/linking"}
+      postMessageOrigin={"/"}
     >
-      <WalletMultiButton />
-      <p>Hi {wallet?.publicKey?.toBase58()}!</p>
-      <WalletLinkButton />
-    </div>
+      <div
+        style={{
+          height: "100%",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <WalletMultiButton />
+        <p>Hi {wallet?.publicKey?.toBase58()}!</p>
+        <WalletLinkButton />
+      </div>
+    </WalletLinkingProvider>
   );
 };
 
@@ -79,7 +88,7 @@ function App() {
               <Routes>
                 <Route index element={<Content />} />
                 <Route
-                  path="linking"
+                  path="/linking"
                   element={
                     <WalletLinkingFlow
                       linkWalletInputParameters={linkWalletInputParameters}

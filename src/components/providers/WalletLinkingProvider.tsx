@@ -214,7 +214,6 @@ export default function WalletLinkingProvider({
   );
 
   const onSave = useCallback(async () => {
-    const newLinkedWallets = stagedWallets.map(R.prop("publicKey")) as string[];
     setStagedWallets([]);
   }, [stagedWallets]);
 
