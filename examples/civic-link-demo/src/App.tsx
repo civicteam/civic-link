@@ -23,7 +23,10 @@ import { Routes, Route } from "react-router-dom";
 import queryString from "query-string";
 import {
   LinkWalletInputParameters,
+  useMultiWallet,
+  WalletConnectionProvider,
   WalletLinkingProvider,
+  PostMessageProvider,
 } from "@civic/civic-link";
 import "@civic/react-commons/dist/style.css";
 import { WalletLinkButton } from "./WalletLinkButton";
@@ -33,24 +36,30 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 
 const Content = () => {
   const wallet = useWallet();
+  const multiWallet = useMultiWallet();
+
+  console.log("useMultiWallet", multiWallet);
+  console.log("wallet", wallet);
   return (
-    <WalletLinkingProvider
-      existingWalletAddresses={["2dm3CqveDgGgsHmNXNWBAUDfVUeDsbY2Cxr3kdH4GWFQ"]}
-      civicLinkUrl={"/linking"}
-      postMessageOrigin={"/"}
+    <div
+      style={{
+        height: "100%",
+        justifyContent: "center",
+        alignContent: "center",
+      }}
     >
-      <div
-        style={{
-          height: "100%",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-      >
-        <WalletMultiButton />
-        <p>Hi {wallet?.publicKey?.toBase58()}!</p>
-        <WalletLinkButton />
-      </div>
-    </WalletLinkingProvider>
+      <p>Hi {wallet?.publicKey?.toBase58()}!</p>
+      <WalletMultiButton />
+      {wallet && wallet.publicKey && (
+        <WalletLinkingProvider
+          existingWalletAddresses={[]}
+          civicLinkUrl={"/linking"}
+          postMessageOrigin={"/"}
+        >
+          <WalletLinkButton />
+        </WalletLinkingProvider>
+      )}
+    </div>
   );
 };
 
@@ -83,22 +92,30 @@ function App() {
     <div className="App">
       <div className="App-header">
         <ConnectionProvider endpoint={endpoint}>
-          <WalletProvider wallets={wallets} autoConnect>
-            <WalletModalProvider>
-              <Routes>
-                <Route index element={<Content />} />
-                <Route
-                  path="/linking"
-                  element={
-                    <WalletLinkingFlow
-                      linkWalletInputParameters={linkWalletInputParameters}
-                      targetWindow={targetWindow}
+          <PostMessageProvider
+            targetWindow={targetWindow}
+            targetWindowOrigin={linkWalletInputParameters.origin || "*"}
+            listenForAnalytics={false}
+          >
+            <WalletProvider wallets={wallets} autoConnect>
+              <WalletConnectionProvider>
+                <WalletModalProvider>
+                  <Routes>
+                    <Route index element={<Content />} />
+                    <Route
+                      path="/linking"
+                      element={
+                        <WalletLinkingFlow
+                          linkWalletInputParameters={linkWalletInputParameters}
+                          targetWindow={targetWindow}
+                        />
+                      }
                     />
-                  }
-                />
-              </Routes>
-            </WalletModalProvider>
-          </WalletProvider>
+                  </Routes>
+                </WalletModalProvider>
+              </WalletConnectionProvider>
+            </WalletProvider>
+          </PostMessageProvider>
         </ConnectionProvider>
       </div>
     </div>

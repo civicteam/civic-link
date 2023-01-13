@@ -1100,10 +1100,10 @@
     eventemitter3 "^4.0.7"
     uuid "^8.3.2"
 
-"@civic/civic-link@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@civic/civic-link/-/civic-link-0.0.6.tgz#2e2c9283ed2cc24443a79b1d2d8ee2da087d6ef5"
-  integrity sha512-i24/rF4yTjRGc4Tjp5BCczCXVipn6LPZevGcF60R1OWBuGEtKJD/3BV7CpcAMtvA/dNZVwaXf3ZldgUyhqaVrQ==
+"@civic/civic-link@^0.0.6-alpha.4":
+  version "0.0.6-alpha.4"
+  resolved "https://registry.yarnpkg.com/@civic/civic-link/-/civic-link-0.0.6-alpha.4.tgz#e6b27b14d568b60293257cbb3b5796fe759ea2db"
+  integrity sha512-fp8EJoCZEUpqZicd8D0dKOqPpHMcygf9jO1gSpmBJ/t648+O+LUk1guZVOFZ961dTAqRJj/VbTi7Vmf+4zqE0A==
   dependencies:
     "@civic/did-registry" "^0.0.6-alpha.2"
     "@civic/react-commons" "^0.0.3"

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@civic/civic-link": "^0.0.6",
+    "@civic/civic-link": "^0.0.6-alpha.4",
     "@solana/wallet-adapter-base": "^0.9.20",
     "@solana/wallet-adapter-react": "^0.15.28",
     "@solana/wallet-adapter-react-ui": "^0.9.27",

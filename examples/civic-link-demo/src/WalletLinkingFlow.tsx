@@ -18,21 +18,21 @@ export const WalletLinkingFlow = ({
   targetWindow: Window;
 }) => {
   return (
-    <PostMessageProvider
+    // <PostMessageProvider
+    //   targetWindow={targetWindow}
+    //   targetWindowOrigin={linkWalletInputParameters.origin || "*"}
+    //   listenForAnalytics={false}
+    // >
+    //   <WalletConnectionProvider
+    //     setWalletOnProviderChange
+    //     network={linkWalletInputParameters.chainNetwork as WalletAdapterNetwork}
+    //   >
+    <LinkWalletWithOwnershipFlow
+      linkWalletInputParameters={linkWalletInputParameters}
       targetWindow={targetWindow}
-      targetWindowOrigin={linkWalletInputParameters.origin || "*"}
-      listenForAnalytics={false}
-    >
-      <WalletConnectionProvider
-        setWalletOnProviderChange
-        network={linkWalletInputParameters.chainNetwork as WalletAdapterNetwork}
-      >
-        <LinkWalletWithOwnershipFlow
-          linkWalletInputParameters={linkWalletInputParameters}
-          targetWindow={targetWindow}
-          horizontalSteps={false}
-        />
-      </WalletConnectionProvider>
-    </PostMessageProvider>
+      horizontalSteps={false}
+    />
+    //   </WalletConnectionProvider>
+    // </PostMessageProvider>
   );
 };
