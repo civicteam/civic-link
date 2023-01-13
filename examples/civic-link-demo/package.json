@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@civic/civic-link": "^0.0.6",
     "@solana/wallet-adapter-base": "^0.9.20",
     "@solana/wallet-adapter-react": "^0.15.28",
     "@solana/wallet-adapter-react-ui": "^0.9.27",
@@ -21,9 +22,11 @@
     "crypto-browserify": "^3.12.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.2",
     "react-scripts": "^5.0.1",
     "stream-browserify": "^3.0.0",
     "typescript": "^4.9.4",
@@ -41,6 +44,10 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "resolutions": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "browserslist": {
     "production": [

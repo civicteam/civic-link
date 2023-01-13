@@ -1,64 +1,99 @@
-import React, { useMemo } from 'react';
-import './App.css';
-import logo from './logo.svg';
-import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
+import React, { useMemo, useState, useEffect } from "react";
+import "./App.css";
+import logo from "./logo.svg";
+import {
+  ConnectionProvider,
+  useWallet,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
 import { clusterApiUrl } from "@solana/web3.js";
 import {
-    GlowWalletAdapter,
-    PhantomWalletAdapter,
-    SolflareWalletAdapter,
-    SolletWalletAdapter, TorusWalletAdapter
+  GlowWalletAdapter,
+  PhantomWalletAdapter,
+  SolflareWalletAdapter,
+  SolletWalletAdapter,
+  TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
-    WalletModalProvider,
-    WalletMultiButton
+  WalletModalProvider,
+  WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
+import queryString from "query-string";
+import { LinkWalletInputParameters } from "@civic/civic-link";
+import "@civic/react-commons/dist/style.css";
+import { WalletLinkButton } from "./WalletLinkButton";
+import { WalletLinkingFlow } from "./WalletLinkingFlow";
 
-require('@solana/wallet-adapter-react-ui/styles.css');
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 const Content = () => {
-    const wallet = useWallet()
-    return <header className="App-header">
-        <WalletMultiButton/>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hi {wallet?.publicKey?.toBase58()}!</p>
-        <a
-            className="App-link"
-            href="https://docs.solana.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Learn Solana
-        </a>
-    </header>
-}
+  const wallet = useWallet();
+  return (
+    <div
+      style={{
+        height: "100%",
+        justifyContent: "center",
+        alignContent: "center",
+      }}
+    >
+      <WalletMultiButton />
+      <p>Hi {wallet?.publicKey?.toBase58()}!</p>
+      <WalletLinkButton />
+    </div>
+  );
+};
 
 function App() {
-    const network = WalletAdapterNetwork.Devnet;
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
-    const wallets = useMemo(
-        () => [
-            new PhantomWalletAdapter(),
-            new GlowWalletAdapter(),
-            new SolflareWalletAdapter({ network }),
-            new TorusWalletAdapter(),
-            new SolletWalletAdapter({ network }),
-        ],
-        [network]
-    );
+  const network = WalletAdapterNetwork.Devnet;
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const wallets = useMemo(
+    () => [
+      new PhantomWalletAdapter(),
+      new GlowWalletAdapter(),
+      new SolflareWalletAdapter({ network }),
+      new TorusWalletAdapter(),
+      new SolletWalletAdapter({ network }),
+    ],
+    [network]
+  );
+  const queryParams = queryString.parse(window.location.search);
+  const [targetWindow, setTargetWindow] = useState<Window>(window);
 
-    return (
-        <div className="App">
-            <ConnectionProvider endpoint={endpoint}>
-                <WalletProvider wallets={wallets} autoConnect>
-                    <WalletModalProvider>
-                        <Content />
-                    </WalletModalProvider>
-                </WalletProvider>
-            </ConnectionProvider>
-        </div>
-    );
+  const linkWalletInputParameters = useMemo(
+    () => queryParams || {},
+    [queryParams]
+  ) as LinkWalletInputParameters;
+
+  useEffect(() => {
+    setTargetWindow(window.opener || window);
+  }, []);
+
+  return (
+    <div className="App">
+      <div className="App-header">
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletModalProvider>
+              <Routes>
+                <Route index element={<Content />} />
+                <Route
+                  path="linking"
+                  element={
+                    <WalletLinkingFlow
+                      linkWalletInputParameters={linkWalletInputParameters}
+                      targetWindow={targetWindow}
+                    />
+                  }
+                />
+              </Routes>
+            </WalletModalProvider>
+          </WalletProvider>
+        </ConnectionProvider>
+      </div>
+    </div>
+  );
 }
 
 export default App;
