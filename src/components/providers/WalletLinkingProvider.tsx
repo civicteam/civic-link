@@ -58,14 +58,12 @@ type SparseWallet = {
 };
 
 type OwnProps = {
-  // addWalletAddress: (address: string) => void;
   existingWalletAddresses: string[];
   civicLinkUrl: string;
   postMessageOrigin: string;
 };
 
 export default function WalletLinkingProvider({
-  // addWalletAddress,
   existingWalletAddresses,
   civicLinkUrl,
   postMessageOrigin,
@@ -217,9 +215,6 @@ export default function WalletLinkingProvider({
 
   const onSave = useCallback(async () => {
     const newLinkedWallets = stagedWallets.map(R.prop("publicKey")) as string[];
-    // const addWalletPromises = newLinkedWallets.map(addWalletAddress);
-
-    // await Promise.all(addWalletPromises);
     setStagedWallets([]);
   }, [stagedWallets]);
 
