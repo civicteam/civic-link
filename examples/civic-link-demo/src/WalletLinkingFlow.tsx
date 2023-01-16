@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   LinkWalletInputParameters,
   WalletConnectionProvider,
@@ -10,29 +10,27 @@ import {
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import queryString from "query-string";
 
-export const WalletLinkingFlow = ({
-  linkWalletInputParameters,
-  targetWindow,
-}: {
-  linkWalletInputParameters: LinkWalletInputParameters;
-  targetWindow: Window;
-}) => {
+export const WalletLinkingFlow = ({}: {}) => {
+  const queryParams = queryString.parse(window.location.search);
+
+  const linkWalletInputParameters = useMemo(
+    () => queryParams || {},
+    [queryParams]
+  ) as LinkWalletInputParameters;
+
   return (
-    // <PostMessageProvider
-    //   targetWindow={targetWindow}
-    //   targetWindowOrigin={linkWalletInputParameters.origin || "*"}
-    //   listenForAnalytics={false}
-    // >
-    //   <WalletConnectionProvider
-    //     setWalletOnProviderChange
-    //     network={linkWalletInputParameters.chainNetwork as WalletAdapterNetwork}
-    //   >
-    <LinkWalletWithOwnershipFlow
-      linkWalletInputParameters={linkWalletInputParameters}
-      targetWindow={targetWindow}
-      horizontalSteps={false}
-    />
-    //   </WalletConnectionProvider>
-    // </PostMessageProvider>
+    <PostMessageProvider
+      targetWindow={window.opener}
+      targetWindowOrigin={linkWalletInputParameters.origin || "*"}
+      listenForAnalytics={false}
+    >
+      <WalletConnectionProvider>
+        <LinkWalletWithOwnershipFlow
+          linkWalletInputParameters={linkWalletInputParameters}
+          targetWindow={window.opener}
+          horizontalSteps={false}
+        />
+      </WalletConnectionProvider>
+    </PostMessageProvider>
   );
 };

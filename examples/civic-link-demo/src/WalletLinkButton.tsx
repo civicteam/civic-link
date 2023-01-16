@@ -1,9 +1,13 @@
-import { useWalletLinking, FlowType } from "@civic/civic-link";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import {
+  useWalletLinking,
+  FlowType,
+  PostMessageProvider,
+  useMultiWallet,
+} from "@civic/civic-link";
 import { useEffect, useState } from "react";
 
 export const WalletLinkButton = () => {
-  const { publicKey, sendTransaction } = useWallet();
+  const { wallet } = useMultiWallet();
   const { successfullyAddedWalletToDidPromise, openLinkWalletPage } =
     useWalletLinking();
   const [isLoading, setIsLoading] = useState(false);
@@ -16,13 +20,15 @@ export const WalletLinkButton = () => {
     }
   }, [successfullyAddedWalletToDidPromise]);
 
-  const handleLinkWallet = async () => {
-    openLinkWalletPage(FlowType.VERIFY_WITH_OWNERSHIP, publicKey?.toBase58());
+  const handleLinkWallet = () => {
+    if (wallet.publicKey) {
+      openLinkWalletPage(FlowType.VERIFY_WITH_OWNERSHIP, wallet.publicKey);
+    }
   };
 
   return (
     <div>
-      {publicKey ? (
+      {wallet.publicKey ? (
         <button onClick={handleLinkWallet}>Link Wallet</button>
       ) : (
         <p> please connect wallet to start linking</p>
