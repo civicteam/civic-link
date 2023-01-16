@@ -4,6 +4,7 @@ import {
   PostMessageProvider,
   useMultiWallet,
 } from "@civic/civic-link";
+import { useConnection } from "@solana/wallet-adapter-react";
 import { useEffect, useState } from "react";
 
 export const WalletLinkButton = () => {
@@ -11,6 +12,7 @@ export const WalletLinkButton = () => {
   const { successfullyAddedWalletToDidPromise, openLinkWalletPage } =
     useWalletLinking();
   const [isLoading, setIsLoading] = useState(false);
+  const { connection } = useConnection();
 
   useEffect(() => {
     if (successfullyAddedWalletToDidPromise) {
@@ -22,7 +24,11 @@ export const WalletLinkButton = () => {
 
   const handleLinkWallet = () => {
     if (wallet.publicKey) {
-      openLinkWalletPage(FlowType.VERIFY_WITH_OWNERSHIP, wallet.publicKey);
+      openLinkWalletPage(
+        FlowType.VERIFY_WITH_OWNERSHIP,
+        wallet.publicKey,
+        connection.rpcEndpoint
+      );
     }
   };
 

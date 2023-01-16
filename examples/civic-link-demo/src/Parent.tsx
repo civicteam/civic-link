@@ -1,4 +1,3 @@
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import {
   useMultiWallet,
   WalletLinkingProvider,
@@ -10,32 +9,32 @@ import { WalletLinkButton } from "./WalletLinkButton";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 export const Parent = () => {
-  const { wallet } = useMultiWallet();
+  const { wallet, selectChain } = useMultiWallet();
 
   return (
     <PostMessageProvider
       targetWindow={window}
       targetWindowOrigin={window.origin}
-      civicLinkUrl={"http://localhost:3000/linking"}
+      civicLinkUrl={`${window.location.href}linking`}
       listenForAnalytics={false}
     >
-      <div
-        style={{
-          height: "100%",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
+      <WalletLinkingProvider
+        existingWalletAddresses={[]}
+        civicLinkUrl={`${window.location.href}linking`}
+        postMessageOrigin={"*"}
       >
-        <p>Hi {wallet?.publicKey}!</p>
-        <WalletMultiButton />
-        <WalletLinkingProvider
-          existingWalletAddresses={[]}
-          civicLinkUrl={"http://localhost:3000/linking"}
-          postMessageOrigin={"*"}
+        <div
+          style={{
+            height: "100%",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
         >
+          <p>Hi {wallet?.publicKey}!</p>
+          <button onClick={() => selectChain()}>Select solana</button>
           <WalletLinkButton />
-        </WalletLinkingProvider>
-      </div>
+        </div>
+      </WalletLinkingProvider>
     </PostMessageProvider>
   );
 };
