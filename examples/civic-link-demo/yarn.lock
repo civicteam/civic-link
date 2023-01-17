@@ -1153,7 +1153,7 @@
     twin.macro "^2.8.2"
     vite-plugin-svgr "^2.2.1"
 
-"@civic/shared-tailwind@^1.0.1":
+"@civic/shared-tailwind@^1.0.1", "@civic/shared-tailwind@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@civic/shared-tailwind/-/shared-tailwind-1.0.2.tgz#d5377919b1cfd8f2fcf8d290db2a3a2b3c0f6db1"
   integrity sha512-lPSjbGApnNQ6ztO1bNes4Pnt9Q1S/EE56ezjNuYPqSZdOt/IqJIDXVvIq4RdhWG6s2MRD+YA1CS+LjfJ0mcghg==

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@civic/civic-link": "^0.0.6-alpha.4",
+    "@civic/shared-tailwind": "^1.0.2",
     "@identity.com/sol-did-client": "^3.3.0",
     "@solana/wallet-adapter-base": "^0.9.20",
     "@solana/wallet-adapter-react": "^0.15.28",

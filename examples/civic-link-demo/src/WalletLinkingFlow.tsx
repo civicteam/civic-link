@@ -9,6 +9,7 @@ import {
 } from "@civic/civic-link";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import queryString from "query-string";
+import { BaseStepper } from "./BaseStepper";
 
 export const WalletLinkingFlow = ({}: {}) => {
   const queryParams = queryString.parse(window.location.search);
@@ -25,11 +26,13 @@ export const WalletLinkingFlow = ({}: {}) => {
       listenForAnalytics={false}
     >
       <WalletConnectionProvider>
-        <LinkWalletWithOwnershipFlow
-          linkWalletInputParameters={linkWalletInputParameters}
-          targetWindow={window.opener}
-          horizontalSteps={false}
-        />
+        <BaseStepper>
+          <LinkWalletWithOwnershipFlow
+            linkWalletInputParameters={linkWalletInputParameters}
+            targetWindow={window.opener}
+            horizontalSteps={false}
+          />
+        </BaseStepper>
       </WalletConnectionProvider>
     </PostMessageProvider>
   );
