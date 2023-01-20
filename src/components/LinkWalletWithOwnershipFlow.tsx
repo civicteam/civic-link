@@ -274,8 +274,8 @@ function LinkWalletWithOwnershipFlow({
             </h3>
             <div className="mt-6 mb-6 text-left">
               <span>
-                Your wallet is now visible to the public. You can close this
-                window to return to Civic.me.
+                The NFTs in this wallet are now visible on your civic.me
+                profile. You can close this window and return to civic.me.
               </span>
             </div>
             <StyledRoundedCenteredButton
