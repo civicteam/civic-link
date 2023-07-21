@@ -160,7 +160,7 @@ export const addVerificationMethodWithOwnershipProof = async (
       .addVerificationMethod(
         {
           fragment,
-          keyData: linkingWalletAuthority.toBytes(),
+          keyData: linkingWalletAuthority.toBuffer(),
           methodType: VerificationMethodType.Ed25519VerificationKey2018,
           flags: [BitwiseVerificationMethodFlag.CapabilityInvocation],
         },
