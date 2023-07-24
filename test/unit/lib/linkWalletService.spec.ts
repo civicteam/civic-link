@@ -4,6 +4,7 @@ import {
   DidSolService,
   DidSolDocument,
   BitwiseVerificationMethodFlag,
+  RawDidSolDataAccount,
 } from "@identity.com/sol-did-client";
 import BN from "bn.js";
 import { DIDDocument } from "did-resolver";
@@ -62,7 +63,7 @@ const linkFragment = getDefaultFragment(walletToLinkPublicKey);
 //   id: `did:sol:localnet:${existingAuthorityPublicKey}`,
 // };
 
-const rawLinkedDataAccount = {
+const rawLinkedDataAccount: RawDidSolDataAccount = {
   version: 0,
   bump: 254,
   nonce: new BN("00"),
@@ -70,14 +71,14 @@ const rawLinkedDataAccount = {
     fragment: "default",
     flags: 72,
     methodType: 0,
-    keyData: existingAuthority.publicKey.toBytes(),
+    keyData: existingAuthority.publicKey.toBuffer(),
   },
   verificationMethods: [
     {
       fragment: linkFragment,
       flags: 72,
       methodType: 0,
-      keyData: walletToLink.publicKey.toBytes(),
+      keyData: walletToLink.publicKey.toBuffer(),
     },
   ],
   services: [],
