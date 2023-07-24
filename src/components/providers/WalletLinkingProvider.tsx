@@ -158,7 +158,7 @@ export default function WalletLinkingProvider({
   );
 
   const postMessageCallback = useCallback(
-    async (evt) => {
+    async (evt: unknown) => {
       const { eventType, data } = evt as IncomingEvent;
       if (
         currentFlowType === FlowType.LOCAL &&

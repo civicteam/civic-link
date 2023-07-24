@@ -101,7 +101,7 @@ function LinkWalletWithOwnershipFlow({
     linkWalletServiceInst.emitVerifyWithProof(walletToLinkPublicKey);
   }, [isFlowComplete, linkWalletServiceInst, walletToLinkPublicKey]);
 
-  const onStepFailed = useCallback((stepNum) => {
+  const onStepFailed = useCallback((stepNum: number) => {
     // reset the flow back to the start
     setStepFailed(stepNum);
   }, []);

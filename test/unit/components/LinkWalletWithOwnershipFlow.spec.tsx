@@ -5,20 +5,8 @@ import { render, RenderResult, waitFor } from "@testing-library/react";
 import { Keypair, Transaction, clusterApiUrl } from "@solana/web3.js";
 import type { StepProps } from "@civic/react-commons";
 import { StepStatus, getShortenedPublicKey } from "@civic/react-commons";
-import {
-  AnalyticsEventAction,
-  AnalyticsEventCategory,
-  CivicPostMessageApi,
-  FlowType,
-  LinkEventType,
-  WalletChainType,
-} from "../../../src/types";
+import { FlowType, WalletChainType } from "../../../src/types";
 import LinkWalletWithOwnershipFlow from "../../../src/components/LinkWalletWithOwnershipFlow";
-import ConnectWalletStep from "../../../src/components/LinkWalletWithOwnershipSteps/ConnectWalletStep";
-import ProveWalletOwnership from "../../../src/components/LinkWalletWithOwnershipSteps/ProveWalletOwnership";
-import UpdateProfileStep from "../../../src/components/LinkWalletWithOwnershipSteps/UpdateProfile";
-import { useCivicPostMessageApi } from "../../../src/components/providers/PostMessageProvider";
-import { LinkWalletService } from "../../../src/lib/linkWalletService";
 
 const mockInitialize = jest.fn();
 const mockIsOwnershipFlagAlreadyPresent = jest.fn();
