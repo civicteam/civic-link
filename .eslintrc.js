@@ -64,6 +64,8 @@ module.exports = {
     ],
     "import/prefer-default-export": "off",
     "no-useless-constructor": "off",
-    "no-only-tests/no-only-tests": "error"
+    "no-only-tests/no-only-tests": "error",
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "off",
   },
 };
