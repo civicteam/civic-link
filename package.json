@@ -1,6 +1,6 @@
 {
   "name": "@civic/civic-link",
-  "version": "0.0.7-beta.1",
+  "version": "0.0.7-beta.2",
   "author": "civic.com",
   "repository": "git@github.com:civicteam/civic-link.git",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "@solana/wallet-adapter-react": "^0.15.33",
     "@solana/wallet-adapter-react-ui": "^0.9.32",
     "@solana/wallet-adapter-wallets": "^0.19.19",
-    "@solana/web3.js": "1.65.0",
+    "@solana/web3.js": "^1.78.0",
     "did-resolver": "^3.2.2",
     "eslint": "^8.45.0",
     "query-string": "^7.1.1",
