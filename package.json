@@ -1,6 +1,6 @@
 {
   "name": "@civic/civic-link",
-  "version": "0.0.7-beta.1",
+  "version": "0.0.7-beta.15",
   "author": "civic.com",
   "repository": "git@github.com:civicteam/civic-link.git",
   "license": "MIT",
@@ -50,7 +50,7 @@
     "@types/jest": "^29.5.3",
     "@types/jsdom": "^21.1.1",
     "@types/ramda": "^0.28.0",
-    "@types/react": "^18.2.15",
+    "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@vitejs/plugin-react": "^4.0.3",
@@ -75,8 +75,8 @@
     "vite-plugin-dts": "^3.3.1"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "files": [
     "dist"
