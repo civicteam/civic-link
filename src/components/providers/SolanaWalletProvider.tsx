@@ -58,7 +58,9 @@ export function SolanaWalletProvider({
         const walletAdapter = await build(
           lowLevelWallet,
           () => {
-            (buttonRef.current?.children[0] as HTMLButtonElement).click();
+            (
+              buttonRef.current?.children[0].children[0] as HTMLButtonElement
+            ).click();
           },
           didResolver
         );
