@@ -1,6 +1,6 @@
 {
   "name": "@civic/civic-link",
-  "version": "0.0.7-beta.15",
+  "version": "0.0.8-beta.1",
   "author": "civic.com",
   "repository": "git@github.com:civicteam/civic-link.git",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "@ethersproject/providers": "^5.7.1",
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
-    "@identity.com/sol-did-client": "^3.1.2",
+    "@civic/sol-did-client": "^4.0.0-alpha.2.no.legacy.support",
     "@solana/wallet-adapter-base": "^0.9.22",
     "@solana/wallet-adapter-react": "^0.15.33",
     "@solana/wallet-adapter-react-ui": "^0.9.32",
